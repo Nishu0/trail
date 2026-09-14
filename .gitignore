@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.env*
+!.env.example
+*.tsbuildinfo
+.data/
+output/
+.DS_Store
+next-env.d.ts
+*.log
+.vercel/
+
+research/*source-cache.json
+research/*reviewed-profiles.json
+research/review-batches/
+research/linkedin-benchmark.json
