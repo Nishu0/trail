@@ -1,0 +1,1 @@
+ALTER TABLE "trail_projects" ADD COLUMN "repository_candidates" text[];
