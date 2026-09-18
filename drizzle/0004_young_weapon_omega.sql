@@ -1,0 +1,2 @@
+ALTER TABLE "trail_jobs" ADD COLUMN "company_id" text;--> statement-breakpoint
+ALTER TABLE "trail_jobs" ADD CONSTRAINT "trail_jobs_workspace_id_company_id_trail_companies_workspace_id_id_fk" FOREIGN KEY ("workspace_id","company_id") REFERENCES "public"."trail_companies"("workspace_id","id") ON DELETE no action ON UPDATE no action;
