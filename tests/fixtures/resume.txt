@@ -1,0 +1,11 @@
+Alex Builder
+Product engineer
+Location: Ahmedabad, India
+https://github.com/alex-builder
+Summary
+I build developer tools and shipped a local-first notes app.
+Technical skills
+TypeScript, React, Next.js, Solidity
+Projects
+https://ethglobal.com/showcase/example-123
+https://github.com/alex-builder/notes
