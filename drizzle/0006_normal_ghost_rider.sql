@@ -1,0 +1,1 @@
+ALTER TABLE "trail_linkedin_revisions" ADD COLUMN "base_version" integer DEFAULT 1 NOT NULL;
