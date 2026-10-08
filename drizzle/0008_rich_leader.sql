@@ -1,0 +1,1 @@
+ALTER TABLE "trail_linkedin_messages" ADD COLUMN "sequence" bigserial NOT NULL;
