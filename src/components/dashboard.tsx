@@ -27,19 +27,22 @@ import {
   Asterisk,
   Compass,
   Activity,
+  MessagesSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Mark } from "./mark";
 import { useWorkspace, request } from "./workspace";
 import { Modal, CompanyIcon, localDate, Empty } from "./shared";
-import { Opportunities, Applications, AddOpportunity } from "./opportunities";
+import { Opportunities, AddOpportunity } from "./opportunities";
 import { ProfileView, GitHubActivity, Connections } from "./profile";
 import { Companies, Contributions } from "./companies";
 import { DiscoveryStatus } from "./discovery-status";
 import { OpportunityCompanyPage } from "./opportunity-company";
 import { LinkedInTuning } from "./linkedin-tuning";
-import { Outreach } from "./outreach";
+import { Pipeline } from "./pipeline";
+import { InterviewPrep } from "./interview-prep";
 import { dueJobs, fit, type Workspace } from "@/lib/model";
+import { describe } from "@/lib/pipeline";
 const navigation = [
   {
     view: "overview",
@@ -54,12 +57,17 @@ const navigation = [
     group: "YOUR WORKSPACE",
   },
   {
-    view: "applications",
-    label: "Applications",
+    view: "pipeline",
+    label: "Pipeline",
     icon: BriefcaseBusiness,
     group: "YOUR WORKSPACE",
   },
-  { view: "outreach", label: "Outreach", icon: Mail, group: "YOUR WORKSPACE" },
+  {
+    view: "interview",
+    label: "Interview prep",
+    icon: MessagesSquare,
+    group: "YOUR WORKSPACE",
+  },
   {
     view: "companies",
     label: "Companies",
@@ -100,13 +108,13 @@ const copy: Record<string, [string, string]> = {
     "Follow the signal.",
     "A thoughtful shortlist, with a source and a reason to look closer.",
   ],
-  applications: [
-    "Keep the conversation moving.",
-    "Track every application, from your first hello to your next chapter.",
+  pipeline: [
+    "Pipeline",
+    "Every company, where it stands, and the email to send next.",
   ],
-  outreach: [
-    "A note that sounds like you.",
-    "Specific, personal introductions. Yours to review, edit, and send.",
+  interview: [
+    "Walk in ready.",
+    "Know what each call is for, what you’ll be asked, and what to practise.",
   ],
   companies: [
     "Find your kind of people.",
@@ -189,6 +197,11 @@ function DashboardInner({
     (n) => n.view === (view === "linkedin" ? "profile" : view),
   );
   const due = data ? dueJobs(data.jobs, now) : [];
+  const needsYou = data
+    ? data.jobs.filter(
+        (j) => !j.sample && describe(j, data.drafts, now).group === "needs",
+      ).length
+    : 0;
   const date = new Date().toLocaleDateString("en-GB", {
     weekday: "short",
     day: "numeric",
@@ -286,19 +299,8 @@ function DashboardInner({
                     >
                       <n.icon size={19} />
                       <span className="nav-label">{n.label}</span>
-                      {n.view === "applications" &&
-                        !!data?.jobs.filter(
-                          (j) => !j.sample && j.stage === "Applied",
-                        ).length && (
-                          <i>
-                            {
-                              data.jobs.filter(
-                                (j) => !j.sample && j.stage === "Applied",
-                              ).length
-                            }
-                          </i>
-                        )}
-                      {n.view === "discover" && (
+                      {n.view === "pipeline" && !!needsYou && <i>{needsYou}</i>}
+                      {["discover", "interview"].includes(n.view) && (
                         <span className="nav-new">NEW</span>
                       )}
                     </Link>
@@ -453,10 +455,10 @@ function DashboardInner({
               <Overview onDiscover={discover} onAdd={() => setAdd(true)} />
             ) : view === "discover" ? (
               <Opportunities search={search} onSearch={setSearch} />
-            ) : view === "applications" ? (
-              <Applications />
-            ) : view === "outreach" ? (
-              <Outreach />
+            ) : view === "pipeline" ? (
+              <Pipeline />
+            ) : view === "interview" ? (
+              <InterviewPrep />
             ) : view === "companies" ? (
               opportunityId ? (
                 <OpportunityCompanyPage jobId={opportunityId} />
@@ -506,7 +508,7 @@ function DashboardInner({
           due.map((j) => (
             <Link
               key={j.id}
-              href="/dashboard/applications"
+              href="/dashboard/pipeline"
               className="notification-row"
               onClick={() => setNotifications(false)}
             >
@@ -761,7 +763,7 @@ function Overview({
                 done: data.drafts.length > 0,
                 title: "Say a thoughtful hello",
                 text: "Draft your first personal introduction",
-                href: "/dashboard/outreach",
+                href: "/dashboard/pipeline",
               },
             ].map((t) => (
               <Link key={t.title} href={t.href}>

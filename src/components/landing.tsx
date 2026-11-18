@@ -262,7 +262,7 @@ export function Landing() {
                       {s.detail}
                     </div>
                     <Link
-                      href={`/dashboard/${i === 1 ? "outreach" : i === 2 ? "contributions" : "discover"}`}
+                      href={`/dashboard/${i === 1 ? "pipeline" : i === 2 ? "contributions" : "discover"}`}
                       className="text-arrow"
                     >
                       Explore your workspace <ArrowUpRight size={17} />
@@ -384,7 +384,7 @@ export function Landing() {
               <div>
                 <span>WORKSPACE</span>
                 <Link href="/dashboard/discover">Discover</Link>
-                <Link href="/dashboard/applications">Applications</Link>
+                <Link href="/dashboard/pipeline">Pipeline</Link>
                 <Link href="/dashboard/companies">Companies</Link>
               </div>
               <div>

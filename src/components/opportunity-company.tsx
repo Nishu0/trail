@@ -344,7 +344,7 @@ function CompanyOpportunity({ job }: { job: Job }) {
                           },
                         );
                         replace(result.workspace);
-                        router.push("/dashboard/outreach");
+                        router.push(`/dashboard/pipeline?job=${job.id}`);
                       })
                     }
                   >

@@ -5,9 +5,13 @@ export default async function Page({
   params: Promise<{ section?: string[] }>;
 }) {
   const { section = [] } = await params;
+  // Applications and Outreach were merged into Pipeline; keep old links working.
+  const view = ["applications", "outreach"].includes(section[0] ?? "")
+    ? "pipeline"
+    : section[0] || "overview";
   return (
     <Dashboard
-      view={section[0] || "overview"}
+      view={view}
       linkedinResearch={section[0] === "linkedin" && section[1] === "research"}
       companyId={
         section[0] === "companies" && section[1] !== "opportunities"

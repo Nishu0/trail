@@ -532,7 +532,7 @@ export function Connections() {
             icon: Mail,
             status: "Drafts & tracking ready",
             text: "Create, edit, and copy outreach drafts. Mailbox OAuth and automatic reply synchronization need a provider connection.",
-            href: "/dashboard/outreach",
+            href: "/dashboard/pipeline",
             action: "Open drafts",
             ready: false,
           },
@@ -554,7 +554,7 @@ export function Connections() {
               ? "AI writing ready"
               : "Server key required",
             text: "Style-aware drafts use your saved evidence and writing samples. Configure AI_GATEWAY_API_KEY in .env.local to enable generation.",
-            href: "/dashboard/outreach",
+            href: "/dashboard/pipeline",
             action: "Open outreach",
             ready: Boolean(status?.aiWriting),
           },
