@@ -5,15 +5,33 @@
   --font-mono: var(--font-mono);
   --color-background: #ffffff;
   --color-foreground: #272b29;
-  --color-primary: #e76c2a;
+  --color-primary: #18181b;
   --color-primary-foreground: #ffffff;
+  --color-brand: #e76c2a;
+  --color-accent: #f4f4f5;
+  --color-accent-foreground: #1d201e;
+  --color-sidebar: #fafbf6;
+  --color-sidebar-foreground: #3f3f46;
+  --color-sidebar-primary: #1d201e;
+  --color-sidebar-primary-foreground: #ffffff;
+  --color-sidebar-accent: #f0f1ea;
+  --color-sidebar-accent-foreground: #1d201e;
+  --color-sidebar-border: #e7e8e1;
+  --color-sidebar-ring: #d4d4d8;
+  --color-chart-1: #e76c2a;
+  --color-chart-2: #3f7fd1;
+  --color-chart-3: #3f9a5c;
+  --color-chart-4: #8a63c9;
+  --color-chart-5: #c9a227;
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+  --radius-xl: 12px;
   --color-secondary: #f5f5f1;
   --color-secondary-foreground: #30372f;
   --color-muted: #f4f4f1;
   --color-muted-foreground: #8a8f8c;
   --color-border: #e8e9e5;
   --color-input: #e8e9e5;
-  --color-ring: #e76c2a;
+  --color-ring: #d4d4d8;
   --color-destructive: #b84335;
   --color-card: white;
   --color-card-foreground: #272b29;
@@ -25,6 +43,16 @@
 }
 * {
   box-sizing: border-box;
+}
+/* dashboard background: sidebar and the area around the content panel. */
+.trail-app {
+  background: #fafbf6;
+}
+/* shadcn base: borders use the theme border colour, not currentColor. */
+*,
+::before,
+::after {
+  border-color: var(--color-border);
 }
 html {
   scroll-behavior: smooth;
@@ -8623,7 +8651,7 @@ input:focus-visible + .prep-box {
   border: 1px solid #e8e9e5;
   border-radius: 12px;
   margin-bottom: 18px;
-  font-size: 14px;
+  font-size: 13px;
 }
 .pipe-ready b {
   font-size: 18px;
@@ -8650,8 +8678,8 @@ input:focus-visible + .prep-box {
   margin-bottom: 12px;
 }
 .pipe-tabs [role="tab"] {
-  padding: 10px 10px 12px;
-  font-size: 14px;
+  padding: 8px 10px 10px;
+  font-size: 13px;
   color: #6f7571;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
@@ -8718,7 +8746,7 @@ input:focus-visible + .prep-box {
 .pipe-head {
   background: #f6f6f3;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 12.5px;
   color: #7d827f;
   position: sticky;
   top: 0;
@@ -8758,8 +8786,8 @@ input:focus-visible + .prep-box {
   width: 100%;
   text-align: left;
   border-top: 1px solid #f0f0ed;
-  font-size: 14px;
-  min-height: 54px;
+  font-size: 13px;
+  min-height: 48px;
   transition: background 0.12s;
 }
 .pipe-row:first-child {
