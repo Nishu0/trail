@@ -5,10 +5,18 @@ export default async function Page({
   params: Promise<{ section?: string[] }>;
 }) {
   const { section = [] } = await params;
-  // Applications and Outreach were merged into Pipeline; keep old links working.
-  const view = ["applications", "outreach"].includes(section[0] ?? "")
-    ? "pipeline"
-    : section[0] || "overview";
+  // old urls (overview, applications, outreach, connections) map to the new pages.
+  const first = section[0] ?? "";
+  const view =
+    first === "" || first === "overview"
+      ? "dashboard"
+      : ["applications", "outreach"].includes(first)
+        ? "pipeline"
+        : first === "connections"
+          ? "settings"
+          : first === "profile" && section[1] === "edit"
+            ? "profile-edit"
+            : first;
   return (
     <Dashboard
       view={view}

@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useWorkspace } from "./workspace";
+import { PageHeader } from "./app-shell";
 import {
   usePipelineSource,
   PipelineSourceProvider,
@@ -160,28 +161,33 @@ export function Pipeline() {
 
   return (
     <PipelineSourceProvider value={source}>
-      <div className={`pipe ${selected ? "with-panel" : ""}`}>
-        <div className="pipe-main">
-          <div className="pipe-top">
-            <span className="pipe-updated">
-              <button aria-label="Refresh pipeline" onClick={reload}>
-                <RefreshCw size={14} />
+      <PageHeader
+        title="Pipeline"
+        actions={
+          <>
+            <span className="flex items-center gap-1.5 text-[12.5px] text-muted-foreground">
+              <button
+                aria-label="Refresh pipeline"
+                onClick={reload}
+                className="rounded p-1 hover:bg-accent hover:text-foreground"
+              >
+                <RefreshCw className="size-3.5" />
               </button>
               Updated {ago(loadedAt, now)}
             </span>
-            {source.kind === "go" && (
-              <span
-                className="pipe-source"
-                title="Jobs, stages and drafts are served by services/pipeline (Go) from DynamoDB Local"
-              >
-                Go · DynamoDB
-              </span>
-            )}
-            <Button variant="outline" onClick={() => setAdd(true)}>
-              <Plus size={15} />
-              Add company
+            <Button
+              variant="secondary"
+              size="sm"
+              className="rounded-full px-3"
+              onClick={() => setAdd(true)}
+            >
+              <Plus /> Add company
             </Button>
-          </div>
+          </>
+        }
+      />
+      <div className={`pipe ${selected ? "with-panel" : ""}`}>
+        <div className="pipe-main">
           {source.error && (
             <div className="status-message error" role="alert">
               {source.error}
